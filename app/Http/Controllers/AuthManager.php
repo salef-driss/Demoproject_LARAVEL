@@ -17,14 +17,17 @@ class AuthManager extends Controller
     }
 
     function admin(){
-        return view("adminPage");
+        if(Auth::check() && Auth::user()->role == "admin"){
+            return view("adminPage");
+        }
+        return view("adminPage")->with("error", "Geen toegang tot deze pagina, je hebt geen admin-rechten.");
     }
 
     function registration(){
         if(Auth::check()){
             return view("welcome");
         }
-        return view("registration");
+        return view("registration")-> with("error", "Geen toegang tot deze pagina, je hebt geen admin-rechten.");
     }
 
     function loginPost(Request $request){
@@ -46,13 +49,28 @@ class AuthManager extends Controller
     function registrationPost(Request $request){
         $request -> validate([
             "name" => "required",
+            "lastname" => "required",
+            "country" => "required",
+            "city" => "required",
+            "houseNr" => "required",
             "email" => "required|email|unique:users",
-            "password" => "required"
-        ]);
+            "password" => "required",
+            "street" => "required",
+            "passwordrepeat" => "required | same:password",
+        ], [
+            'passwordrepeat.same' => 'The password repeat field must match the password field.',
+]);
 
-        $data["name"] = $request->name;
-        $data["email"] = $request->email;
-        $data["password"] = Hash::make($request->password);
+
+            $data["name"] = $request->name;
+            $data["lastname"] = $request->lastname;
+            $data["email"] = $request->email;
+            $data["country"] = $request->country;
+            $data["city"] = $request->city;
+            $data["houseNr"] =  $request->houseNr;
+            $data["street"] = $request->street;
+            $data["password"] = Hash::make($request->password);
+
 
         $user = User::create($data);
 

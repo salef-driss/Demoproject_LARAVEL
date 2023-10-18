@@ -31,4 +31,11 @@ Route::group(["middleware" => "auth"], function(){
     })->name("home");
 });
 
+Route::group(["middleware" => "auth"], function () {
+    Route::get('/admin', [AuthManager::class, "admin"])->name("admin");
+});
+
+
+
+
 
