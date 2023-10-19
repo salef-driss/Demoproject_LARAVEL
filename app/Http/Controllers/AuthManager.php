@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Bier;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class AuthManager extends Controller
 
     function admin(){
         if(Auth::check() && Auth::user()->role == "admin"){
-            return view("adminPage");
+            $bieren = Bier::all();
+            return view("adminPage" , compact("bieren"));
         }
         return view("adminPage")->with("error", "Geen toegang tot deze pagina, je hebt geen admin-rechten.");
     }
@@ -91,7 +93,7 @@ class AuthManager extends Controller
     function UpdateAcountsettings(Request $request){
         $user = Auth::user();
 
-    $updateData = [];
+         $updateData = [];
 
         if ($request->filled('name')) {
             $updateData['name'] = $request->name;
@@ -124,7 +126,13 @@ class AuthManager extends Controller
         $user->update($updateData);
 
          return redirect(route('acountsettings'))->with("success", "Account settings updated successfully.");
- }
+    }
+
+    function homeAssortiment(){
+        $bieren = Bier::all();
+        return view('welcome', compact('bieren'));
+    }
+
 
     function logout(){
         Session::flush();

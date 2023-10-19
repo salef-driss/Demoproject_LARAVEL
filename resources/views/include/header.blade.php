@@ -7,7 +7,7 @@
         @if(auth() -> check())
             {{auth()->user()->name}}
         @else
-            Insta
+            <img src="{{asset('images/361861847_784529253676592_7399646423149979895_n.jpg') }}" alt="" style="width: 70px; height: auto;" >
         @endif
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">

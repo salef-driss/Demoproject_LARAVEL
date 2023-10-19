@@ -4,7 +4,7 @@
 @section("body")
 
 <div class="container">
-    <h1>Account stettings</h1>
+    <h1 class = "Titel_page">Account stettings</h1>
     <form class="row g-3" action= "{{route('acountsettings.post')}}" method = "POST" >
         @csrf
         <div class="col-md-4">

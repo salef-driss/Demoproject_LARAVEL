@@ -5,7 +5,7 @@
 
 <div class="container">
 
-    <h1>Registration</h1>
+    <h1 class = "Titel_page">Registration</h1>
 
     <div class="mt-5">
         @if($errors->any())

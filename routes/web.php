@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\BierManager;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +30,20 @@ Route::get("/logout" , [AuthManager::class, "logout"])->name("logout");
 Route::get("/acountsettings" , [AuthManager::class, "Showacountsettings"])->name("acountsettings");
 Route::post("/acountsettings" , [AuthManager::class, "UpdateAcountsettings"])->name("acountsettings.post");
 
+Route::group(["middleware" => "auth"] , function(){
+    Route::get("/home" , [AuthManager::class ,"homeAssortiment"])->name("home");
+});
 
+Route::get('/beers/{id}/edit', [BierManager::class, "showBeerUpdate"])->name("showUpdate"); // Show the edit form
+Route::post('/beers/{id}/update',[BierManager::class, "BeerUpdatePost"])->name("beer.update");
 
+/*
 Route::group(["middleware" => "auth"], function(){
     Route::get('/home', function () {
         return view('welcome');
     })->name("home");
 });
+*/
 
 Route::group(["middleware" => "auth"], function () {
     Route::get('/admin', [AuthManager::class, "admin"])->name("admin");

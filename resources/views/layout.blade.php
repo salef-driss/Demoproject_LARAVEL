@@ -5,20 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title' , "Custom auth Laravel")</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href= "../css/app.css">
+    <link href= "{{ asset('css/algemeen.css') }}" rel="stylesheet">
   </head>
-
-  <style>
-   .auto-dismiss.fade-out {
-    opacity: 1;
-    transition: opacity 2s;
-}
-
-    .auto-dismiss.fade-out.hidden {
-        opacity: 0;
-        display: none;
-    }
-  </style>
 
 <script>
     setTimeout(function() {

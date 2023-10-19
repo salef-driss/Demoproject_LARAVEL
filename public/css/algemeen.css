@@ -1,0 +1,23 @@
+body{
+    background-color: #BFBFBF
+    ;
+}
+
+.container{
+    margin-top: 3%;
+}
+
+.auto-dismiss.fade-out {
+    opacity: 1;
+    transition: opacity 2s;
+    }
+
+.auto-dismiss.fade-out.hidden {
+        opacity: 0;
+        display: none;
+ }
+
+
+ .Titel_page{
+    margin-bottom: 3%;
+ }

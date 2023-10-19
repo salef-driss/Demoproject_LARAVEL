@@ -1,0 +1,9 @@
+.custom-width {
+    flex: 0 0 auto;
+    width: 30%;
+}
+
+#updateBeer_title{
+    text-align: center;
+    margin-bottom: 3%;
+}
