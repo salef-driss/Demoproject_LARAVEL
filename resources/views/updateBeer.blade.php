@@ -18,7 +18,7 @@
             <img src="{{ asset('images/' . $bier->bierimage) }}" style="max-width: 100%;" alt="">
         </div>
         <div class="col-md-9"> <!-- Allocate 70% width to the form -->
-            <form class="row g-3" action="{{ route('beer.update' , ['id' => $bier->id]) }}" method="POST">
+            <form class="row g-3" action="{{ route('beer.update' , ['id' => $bier->id]) }}"  method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-4">
                     <label for="name" class="form-label">Name</label>

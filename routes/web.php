@@ -34,8 +34,6 @@ Route::group(["middleware" => "auth"] , function(){
     Route::get("/home" , [AuthManager::class ,"homeAssortiment"])->name("home");
 });
 
-Route::get('/beers/{id}/edit', [BierManager::class, "showBeerUpdate"])->name("showUpdate"); // Show the edit form
-Route::post('/beers/{id}/update',[BierManager::class, "BeerUpdatePost"])->name("beer.update");
 
 /*
 Route::group(["middleware" => "auth"], function(){
@@ -45,8 +43,10 @@ Route::group(["middleware" => "auth"], function(){
 });
 */
 
-Route::group(["middleware" => "auth"], function () {
+Route::group(["middleware" => "adminChecker"], function () {
     Route::get('/admin', [AuthManager::class, "admin"])->name("admin");
+    Route::get('/beers/{id}/edit', [BierManager::class, "showBeerUpdate"])->name("showUpdate"); // Show the edit form
+    Route::post('/beers/{id}/update',[BierManager::class, "BeerUpdatePost"])->name("beer.update");
 });
 
 

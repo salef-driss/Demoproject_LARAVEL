@@ -22,13 +22,13 @@ class BierManager extends Controller{
 
     public function BeerUpdatePost(Request $request, $id)
     {
-        if (Auth::check() && Auth::user()->role == "admin") {
+
             if ($request->hasFile('bierimage')) {
                 $request->validate([
                     'naam' => 'required',
                     'prijs' => 'required|numeric',
                     'stok' => 'required|integer',
-                    'bierimage' => 'image|mimes:png,PNG',
+                    'bierimage' => 'image|mimes:png,PNG,jpg,jpeg,png,JPG,JPEG',
                 ]);
 
                 $beer = Bier::find($id);
@@ -41,7 +41,7 @@ class BierManager extends Controller{
                 $image = $request->file('bierimage');
                 $extension = $image->getClientOriginalExtension(); // Get the file extension
                 $imageName = time() . '.' . $extension; // Generate a unique image name
-                $image->storeAs('public/images', $imageName); // Store the image in the 'public/images' directory
+                $image->move(public_path("images"), $imageName); // Store the image in the 'public/images' directory
 
                 $beer->naam = $request->naam;
                 $beer->prijs = $request->prijs;
@@ -72,9 +72,7 @@ class BierManager extends Controller{
 
                 return redirect()->route('showUpdate', ['id' => $id]); // Redirect back to the update page
             }
-        } else {
-            return view("login");
-        }
+
     }
 }
 ?>

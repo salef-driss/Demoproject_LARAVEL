@@ -18,11 +18,9 @@ class AuthManager extends Controller
     }
 
     function admin(){
-        if(Auth::check() && Auth::user()->role == "admin"){
-            $bieren = Bier::all();
-            return view("adminPage" , compact("bieren"));
-        }
-        return view("adminPage")->with("error", "Geen toegang tot deze pagina, je hebt geen admin-rechten.");
+
+        $bieren = Bier::all();
+        return view("adminPage", compact("bieren"));
     }
 
     function registration(){
