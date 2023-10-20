@@ -18,7 +18,14 @@
                     <h5 class="card-title">{{ $bier->naam }}</h5>
                     <p class="card-text">Prijs: €{{ $bier->prijs }}</p>
                     <p class="card-text">Voorraad: {{ $bier->stok }}</p>
-                    <a href="#" class="btn btn-primary">Bestellen</a>
+
+                    @if(Auth::user()->role == "admin")
+                        <a href="{{ route('showUpdate', ['id' => $bier->id]) }}" class="btn btn-primary">Update</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                        @else
+                        <a href="#" class="btn btn-primary">Bestellen</a>
+                    @endif
+
                 </div>
             </div>
         </div>
