@@ -17,7 +17,6 @@ class Winkelkar extends Model
     protected $fillable = [
         // Eventuele velden die je wilt opslaan in de winkelkar
         "user_id",
-        "bier_id",
         "aantal",
         "totaalprijs"
     ];
