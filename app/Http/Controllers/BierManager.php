@@ -135,5 +135,15 @@ class BierManager extends Controller{
         return redirect()->route('showAddBier')->with('success', 'Beer has been added!');
 
     }
+
+    public function showBestelling($id){
+        $bier = Bier::find($id);
+
+        if(!$bier){
+            return redirect()->route('home')->with('error', 'Bier niet gevonden.');
+        }
+
+        return view("bestellenPage",compact("bier"));
+    }
 }
 ?>

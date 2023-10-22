@@ -23,7 +23,7 @@
                         <a href="{{ route('showUpdate', ['id' => $bier->id]) }}" class="btn btn-primary">Update</a>
                         <a href="{{ route('deleteBier', ['id' => $bier->id]) }}" class="btn btn-danger">Delete</a>
                         @else
-                        <a href="#" class="btn btn-primary">Bestellen</a>
+                        <a href="{{ route('showBestelling', ['id' => $bier->id]) }}" class="btn btn-primary">Bestellen</a>
                     @endif
 
                 </div>

@@ -30,9 +30,15 @@ Route::get("/logout" , [AuthManager::class, "logout"])->name("logout");
 Route::get("/acountsettings" , [AuthManager::class, "Showacountsettings"])->name("acountsettings");
 Route::post("/acountsettings" , [AuthManager::class, "UpdateAcountsettings"])->name("acountsettings.post");
 
+
 Route::group(["middleware" => "auth"] , function(){
     Route::get("/home" , [AuthManager::class ,"homeAssortiment"])->name("home");
+    Route::get("/bestell/{id}" , [BierManager::class, "showBestelling"])->name("showBestelling");
 });
+
+
+
+
 
 
 
