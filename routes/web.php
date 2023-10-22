@@ -35,18 +35,26 @@ Route::group(["middleware" => "auth"] , function(){
 });
 
 
-/*
-Route::group(["middleware" => "auth"], function(){
-    Route::get('/home', function () {
-        return view('welcome');
-    })->name("home");
-});
-*/
 
 Route::group(["middleware" => "adminChecker"], function () {
     Route::get('/admin', [AuthManager::class, "admin"])->name("admin");
+
     Route::get('/beers/{id}/edit', [BierManager::class, "showBeerUpdate"])->name("showUpdate"); // Show the edit form
     Route::post('/beers/{id}/update',[BierManager::class, "BeerUpdatePost"])->name("beer.update");
+
+    Route::get("/addBier" , [BierManager::class, "addBierShow"])->name("showAddBier");
+    Route::post("/addBier/post" , [BierManager::class, "addBierPost"])->name("AddBier.POST");
+
+
+    Route::get("/beer/delete/{id}" , [BierManager::class, "deleteBier"])->name("deleteBier");
+
+
+    Route::get('adminify',[AuthManager::class, "adminifyShow"])->name("adminifyShow");
+    Route::post('/update-user-role/{id}', [AuthManager::class, "adminifyShowPost"])->name('adminify.post');
+    Route::get('/delete-user-role/{id}', [AuthManager::class, 'deleteUser'])->name('adminify.delete');
+
+    Route::post('/beers/{id}/update',[BierManager::class, "BeerUpdatePost"])->name("beer.update");
+
 });
 
 

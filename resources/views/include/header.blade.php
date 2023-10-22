@@ -18,14 +18,23 @@
 
         @auth
 
+
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{{route('acountsettings')}}">Account Settings</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{{route('logout')}}">Logout</a>
+            @if(auth()->user()->role == "admin")
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{route('showAddBier')}}">Add Beer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{route('adminifyShow')}}">Adminify</a>
+                </li>
+            @endif
+                <li class="nav-item">
+                <a class="nav-link" href="{{route('acountsettings')}}">Account</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{route('logout')}}">Logout</a>
             </li>
 
 

@@ -69,6 +69,7 @@ class AuthManager extends Controller
             $data["city"] = $request->city;
             $data["houseNr"] =  $request->houseNr;
             $data["street"] = $request->street;
+            $data["role"] = "not_admin";
             $data["password"] = Hash::make($request->password);
 
 
@@ -128,8 +129,40 @@ class AuthManager extends Controller
 
     function homeAssortiment(){
         $bieren = Bier::all();
-        return view('welcome', compact('bieren'));
+        return view('welcome', ["bieren" => $bieren] );
     }
+
+    function adminifyShow(){
+        $users = User::all();
+        return view("adminAddDell" , compact("users"));
+    }
+
+    function adminifyShowPost(Request $request, $id) {
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->route('your.error.route')->with('error', 'User not found');
+        }
+
+        $user->role = $request->input('admin_status');
+        $user->save();
+
+        // Redirect back to the page with a success message
+        return redirect()->route('adminifyShow')->with('success', 'User role updated successfully');
+    }
+
+    function deleteUser($id){
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('adminifyShow')->with('error', 'Gebruiker niet gevonden.');
+        }
+
+        // Verwijder de gebruiker
+        $user->delete();
+
+        return redirect()->route('adminifyShow')->with('success', 'Gebruiker is succesvol verwijderd.');
+    }
+
 
 
     function logout(){

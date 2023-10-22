@@ -74,5 +74,66 @@ class BierManager extends Controller{
             }
 
     }
+
+
+    public function deleteUser($id){
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('adminifyShow')->with('error', 'Gebruiker niet gevonden.');
+        }
+
+        // Verwijder de gebruiker
+        $user->delete();
+
+        return redirect()->route('adminifyShow')->with('success', 'Gebruiker is succesvol verwijderd.');
+    }
+
+    public function deleteBier($id){
+        $bier = Bier::find($id);
+
+        if(!$bier){
+            return redirect()->route('home')->with('error', 'Gebruiker niet gevonden.');
+        }
+
+        $bier->delete();
+
+        return redirect()->route('home')->with('success', 'Gebruiker is succesvol verwijderd.');
+
+    }
+
+
+    public function addBierShow(){
+        return view("addBeer");
+    }
+
+    public function addBierPost(Request $request){
+        $request->validate([
+            'naam' => 'required',
+            'prijs' => 'required|numeric',
+            'stok' => 'required|integer',
+            'bierimage' => 'image|mimes:png,jpg,jpeg',
+        ]);
+
+        $beer = new Bier();
+        $beer->naam = $request->naam;
+        $beer->prijs = $request->prijs;
+        $beer->stok = $request->stok;
+
+        if ($request->hasFile('bierimage')) {
+            $image = $request->file('bierimage');
+            $extension = $image->getClientOriginalExtension();
+            $imageName = time() . '.' . $extension;
+            $image->move(public_path('images'), $imageName);
+            $beer->bierimage = $imageName;
+        }else{
+            $beer->bierimage = 'default4.jpg';
+        }
+
+        $beer->save();
+
+        return redirect()->route('showAddBier')->with('success', 'Beer has been added!');
+
+    }
 }
 ?>
