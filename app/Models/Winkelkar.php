@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\WinkelkarBier;
 use App\Models\Bier;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\User;
@@ -21,9 +22,9 @@ class Winkelkar extends Model
         "totaalprijs"
     ];
 
-    public function bieren()
+    public function winkelkar_bieren()
     {
-        return $this->belongsToMany(Bier::class, 'winkelkar_bier');
+        return $this->belongsToMany(Bier::class, 'winkelkar_bier', 'winkelkar_id', 'bier_id');
     }
 
     public function user()

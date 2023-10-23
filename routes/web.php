@@ -34,6 +34,8 @@ Route::post("/acountsettings" , [AuthManager::class, "UpdateAcountsettings"])->n
 Route::group(["middleware" => "auth"] , function(){
     Route::get("/home" , [AuthManager::class ,"homeAssortiment"])->name("home");
     Route::get("/bestell/{id}" , [BierManager::class, "showBestelling"])->name("showBestelling");
+    Route::post("/add-to-cart/{bier_id}", [BierManager::class, "addToCart"])->name("addToCart");
+
 });
 
 

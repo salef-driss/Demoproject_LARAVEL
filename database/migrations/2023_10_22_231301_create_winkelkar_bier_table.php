@@ -11,25 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('winkelkars', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('aantal')->default(0);
-            $table->decimal('totaalprijs', 8, 2)->default(0);
-            $table->timestamps();
-
-        });
+        Schema::dropIfExists('winkelkar_bier');
 
         Schema::create('winkelkar_bier', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('winkelkar_id')->constrained()->onDelete('cascade');
-            $table->foreignId('bier_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('winkelkar_id');
+            $table->unsignedBigInteger('bier_id');
+            $table->integer('quantity')->default(0); // Standaardwaarde is 0
             $table->timestamps();
+
+            $table->foreign('winkelkar_id')->references('id')->on('winkelkars')->onDelete('cascade');
+            $table->foreign('bier_id')->references('id')->on('biers')->onDelete('cascade');
         });
     }
-
-
-
 
     /**
      * Reverse the migrations.
@@ -37,9 +31,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('winkelkar_bier');
-        Schema::dropIfExists('winkelkars');
-
     }
-
-
 };

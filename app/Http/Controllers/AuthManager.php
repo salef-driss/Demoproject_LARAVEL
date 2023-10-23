@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Bier;
+use App\Models\Winkelkar;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +79,9 @@ class AuthManager extends Controller
         if(!$user){
             return  redirect(route('registration'))->with("error" , "ERROR try again");
         }
+
+        $winkelkar = new Winkelkar();
+        $user->winkelkar()->save($winkelkar);
 
         return redirect(route('login'))->with("success" , "registration succes , Login to acces the aplication");
 
