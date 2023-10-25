@@ -48,8 +48,8 @@
                         <div style="margin-top:3%" class="form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <div class="d-flex">
-                                    <a style="margin-left: 2%" href="javascript:window.location.reload()" class="btn btn-dark">Cancel</a>
-                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                    <a  href="{{route("home")}}" class="btn btn-dark">Continue shopping </a>
+                                    <button style="margin-left: 2%" type="submit" class="btn btn-primary">Add to Cart</button>
                                 </div>
                             </div>
                         </div>

@@ -159,7 +159,7 @@ class BierManager extends Controller{
 
     $user->winkelkar->winkelkar_bieren()->attach($bier_id, ['quantity' => $quantity]);
 
-    return redirect()->route('home')->with('success', 'Bier is toegevoegd aan de winkelmand.');
+    return redirect()->route('showWinkelkar')->with('success', 'Bier is toegevoegd aan de winkelmand.');
     }
 }
 ?>

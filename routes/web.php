@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\BierManager;
+use App\Http\Controllers\Winkelkar;
+
 
 
 /*
@@ -35,7 +37,7 @@ Route::group(["middleware" => "auth"] , function(){
     Route::get("/home" , [AuthManager::class ,"homeAssortiment"])->name("home");
     Route::get("/bestell/{id}" , [BierManager::class, "showBestelling"])->name("showBestelling");
     Route::post("/add-to-cart/{bier_id}", [BierManager::class, "addToCart"])->name("addToCart");
-
+    Route::get("/winkelkar" , [Winkelkar::class , "showWinkelkar"])->name("showWinkelkar");
 });
 
 

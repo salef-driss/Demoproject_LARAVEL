@@ -21,9 +21,10 @@ class Bier extends Model
 
     // app/Models/Bier.php
 
-public function winkelkar_bieren()
-{
-    return $this->hasMany(WinkelkarBier::class);
-}
+    public function winkelkarBieren()
+    {
+        return $this->belongsToMany(Winkelkar::class, 'winkelkar_bier', 'bier_id', 'winkelkar_id')
+            ->withPivot('quantity' ,0);
+    }
 
 }
