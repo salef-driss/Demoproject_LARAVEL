@@ -38,6 +38,7 @@ Route::group(["middleware" => "auth"] , function(){
     Route::get("/bestell/{id}" , [BierManager::class, "showBestelling"])->name("showBestelling");
     Route::post("/add-to-cart/{bier_id}", [BierManager::class, "addToCart"])->name("addToCart");
     Route::get("/winkelkar" , [Winkelkar::class , "showWinkelkar"])->name("showWinkelkar");
+    Route::get('/winkelkar/delete/{id}', [Winkelkar::class, 'deleteFromCart'])->name('deleteFromCart');
 });
 
 

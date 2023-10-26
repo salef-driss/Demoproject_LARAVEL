@@ -24,7 +24,7 @@ class Bier extends Model
     public function winkelkarBieren()
     {
         return $this->belongsToMany(Winkelkar::class, 'winkelkar_bier', 'bier_id', 'winkelkar_id')
-            ->withPivot('quantity' ,0);
+            ->withPivot("id",'quantity' ,0);
     }
 
 }

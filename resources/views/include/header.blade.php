@@ -34,8 +34,11 @@
                 <a class="nav-link" href="{{route('acountsettings')}}">Account</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('showWinkelkar')}}">Cart</a>
+                </li>
+                <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}">Logout</a>
-            </li>
+                </li>
 
 
         @else
