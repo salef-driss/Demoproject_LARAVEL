@@ -4,7 +4,7 @@
 
 @section("body")
 <div class="container">
-    <h1>Order</h1>
+    <h1 style="text-align: center ; margin-bottom:2%;">Order</h1>
 
     @foreach($winkelkaren as $winkelkar)
     @if($winkelkar->status == 2)
@@ -18,7 +18,7 @@
 
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <strong>Winkelkar ID:</strong> {{ $winkelkar->id }}
+                <strong>Order number:</strong> {{ $winkelkar->id }}
             </li>
             <li class="list-group-item">
                 <div class="card">
@@ -41,7 +41,7 @@
                                     <td>{{ $bier->naam }}</td>
                                     <td>{{ $bier->prijs }}</td>
                                     <td>{{ $bier->pivot->quantity }}</td>
-                                    <td>{{ $beerTotal }}</td>
+                                    <td>€ {{ $beerTotal }}</td>
                                 </tr>
                                 <?php $totalPrice += $beerTotal; ?>
                                 @endforeach
@@ -49,7 +49,7 @@
                                     <td>
                                     <td></td>
                                     <td>Tottal Price: </td>
-                                    <td>{{$totalPrice}}</td>
+                                    <td>€ {{$totalPrice}}</td>
                                 </tr>
 
                             </tbody>
