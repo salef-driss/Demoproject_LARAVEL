@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\winkelkar;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -54,6 +55,10 @@ class User extends Authenticatable
 
     public function winkelkar()
     {
-        return $this->hasOne(winkelkar::class);
+        return $this->hasMany(winkelkar::class);
+    }
+
+    public function orders(){
+        return $this->hashMany(Order::class);
     }
 }

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\BierManager;
 use App\Http\Controllers\Winkelkar;
+use App\Http\Controllers\OrderManager;
+
 
 
 
@@ -39,6 +41,9 @@ Route::group(["middleware" => "auth"] , function(){
     Route::post("/add-to-cart/{bier_id}", [BierManager::class, "addToCart"])->name("addToCart");
     Route::get("/winkelkar" , [Winkelkar::class , "showWinkelkar"])->name("showWinkelkar");
     Route::get('/winkelkar/delete/{id}', [Winkelkar::class, 'deleteFromCart'])->name('deleteFromCart');
+    Route::Post('/OrdersPost', [OrderManager::class, 'createOrder'])->name('createOrder');
+    Route::get('/Orders', [OrderManager::class, 'showOrders'])->name('showOrders');
+
 });
 
 

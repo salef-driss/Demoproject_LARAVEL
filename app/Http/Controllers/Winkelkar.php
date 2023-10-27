@@ -14,7 +14,7 @@ class Winkelkar extends Controller
 
        if ($user) {
 
-           $winkelkar = $user->winkelkar;
+           $winkelkar = $user->winkelkar->where("status" , 1)->first();
 
            if ($winkelkar) {
 
@@ -24,7 +24,6 @@ class Winkelkar extends Controller
            }
        }
 
-       // Als de gebruiker niet is ingelogd of geen winkelkar heeft, toon een lege winkelkar
        return view("winkelkar", compact('Bieren'));
     }
 

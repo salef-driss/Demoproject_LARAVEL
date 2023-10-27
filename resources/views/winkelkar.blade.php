@@ -42,7 +42,10 @@
             </div>
 
             <a type="button" href="{{route("home")}}"  class="btn btn-primary">Continue shopping</a>
-            <button type="button" class="btn btn-success">Order</button>
+            <form action="{{ route('createOrder') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success">Order</button>
+            </form>
 
 
             @else

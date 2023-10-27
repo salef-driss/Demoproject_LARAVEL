@@ -157,7 +157,15 @@ class BierManager extends Controller{
         return redirect()->route('showBestelling', ['id' => $bier_id])->with('error', 'Bier niet gevonden.');
     }
 
-    $user->winkelkar->winkelkar_bieren()->attach($bier_id, ['quantity' => $quantity]);
+    foreach($user->winkelkar as $winkelkar){
+        if($winkelkar->status == 1)
+        {
+            $activeCart = $winkelkar;
+            break;
+        }
+    }
+
+    $activeCart->winkelkar_bieren()->attach($bier_id, ['quantity' => $quantity]);
 
     return redirect()->route('showWinkelkar')->with('success', 'Bier is toegevoegd aan de winkelmand.');
     }
