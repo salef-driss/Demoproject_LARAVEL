@@ -43,7 +43,6 @@ Route::group(["middleware" => "auth"] , function(){
     Route::get('/winkelkar/delete/{id}', [Winkelkar::class, 'deleteFromCart'])->name('deleteFromCart');
     Route::Post('/OrdersPost', [OrderManager::class, 'createOrder'])->name('createOrder');
     Route::get('/Orders', [OrderManager::class, 'showOrders'])->name('showOrders');
-
 });
 
 
@@ -70,6 +69,7 @@ Route::group(["middleware" => "adminChecker"], function () {
     Route::get('/delete-user-role/{id}', [AuthManager::class, 'deleteUser'])->name('adminify.delete');
 
     Route::post('/beers/{id}/update',[BierManager::class, "BeerUpdatePost"])->name("beer.update");
+    Route::post('/Orders/{id}/update',[OrderManager::class, "OrderUpdate"])->name("OrderUpdate");
 
 });
 

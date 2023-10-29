@@ -162,7 +162,8 @@ class AuthManager extends Controller
         }
 
         // Verwijder de gebruiker
-        $user->delete();
+        $user->status = 2;
+        $user->save();
 
         return redirect()->route('adminifyShow')->with('success', 'Gebruiker is succesvol verwijderd.');
     }

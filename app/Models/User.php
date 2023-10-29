@@ -29,7 +29,8 @@ class User extends Authenticatable
         "street",
         "houseNr",
         'password',
-        "role"
+        "role",
+        "status"
     ];
 
     /**

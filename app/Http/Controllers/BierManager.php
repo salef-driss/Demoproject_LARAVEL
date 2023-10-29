@@ -82,9 +82,8 @@ class BierManager extends Controller{
         if (!$user) {
             return redirect()->route('adminifyShow')->with('error', 'Gebruiker niet gevonden.');
         }
-
-        // Verwijder de gebruiker
-        $user->delete();
+        $user->status = 2;
+        $user->save();
 
         return redirect()->route('adminifyShow')->with('success', 'Gebruiker is succesvol verwijderd.');
     }
@@ -93,10 +92,11 @@ class BierManager extends Controller{
         $bier = Bier::find($id);
 
         if(!$bier){
-            return redirect()->route('home')->with('error', 'Gebruiker niet gevonden.');
+            return redirect()->route('home')->with('error', 'Cant find this Beer');
         }
 
-        $bier->delete();
+        $bier->status = 2;
+        $bier->save();
 
         return redirect()->route('home')->with('success', 'Gebruiker is succesvol verwijderd.');
 

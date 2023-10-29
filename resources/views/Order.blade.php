@@ -1,19 +1,27 @@
 @extends("layout")
 
-@section("title", "Bestelling")
+@section("title", "Orders")
 
 @section("body")
 <div class="container">
     <h1 style="text-align: center ; margin-bottom:2%;">Order</h1>
 
     @foreach($winkelkaren as $winkelkar)
-    @if($winkelkar->status == 2)
-    <div class="card mb-4">
+    @if($winkelkar->status == 2 || $winkelkar->status == 3)
+
+    <div class="card mb-4
+    @if($winkelkar->status == 2) border border-warning border-3
+    @elseif($winkelkar->status == 3) border border-success border-3
+    @endif">
         <div class="card-body">
-            <h5 class="card-title">Order Details</h5>
-            <p><strong>Name:</strong> {{ $user->name }} {{ $user->lastname }}</p>
-            <p><strong>Email:</strong> {{ $user->email }}</p>
-            <p><strong>Address:</strong> {{ $user->street }} {{ $user->houseNr }}, {{ $user->city }}, {{ $user->country }}</p>
+            @if($winkelkar->status == 2)
+                <h5 class="card-title" style="color: darkgoldenrod; text-align:center">Order details in progress</h5>
+            @elseif($winkelkar->status == 3)
+                <h5 class="card-title" style="color: green; text-align:center">Order has been created and sent.</h5>
+            @endif
+            <p><strong>Name:</strong> {{ $winkelkar->user->name}} {{ $user->lastname }}</p>
+            <p><strong>Email:</strong> {{ $winkelkar->user->email}}</p>
+            <p><strong>Address:</strong> {{ $winkelkar->user->street }} {{ $winkelkar->user->houseNr }}, {{ $winkelkar->user->city }}, {{ $winkelkar->user->country }}</p>
         </div>
 
         <ul class="list-group list-group-flush">
@@ -60,6 +68,12 @@
         </ul>
 
         <div class="card-body">
+            @if($user->role =="admin")
+                <form action="{{ route('OrderUpdate', ['id' => $winkelkar->id]) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Order is ready and sent</button>
+                </form>
+            @endif
 
         </div>
     </div>

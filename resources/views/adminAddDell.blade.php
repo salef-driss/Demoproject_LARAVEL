@@ -14,6 +14,7 @@
     @endif
 
     @foreach($users as $user)
+    @if($user->status == 1)
     <div style="margin-bottom: 3%" class="card">
         <div  class="card-header">User Information</div>
         <div class="card-body">
@@ -55,6 +56,7 @@
             </form>
         </div>
     </div>
+    @endif
     @endforeach
     </div>
 </div>

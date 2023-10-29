@@ -17,6 +17,7 @@ class Bier extends Model
         "prijs",
         "bierimage",
         "stok",
+        "status"
     ];
 
     // app/Models/Bier.php

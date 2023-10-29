@@ -19,6 +19,8 @@
         {{ session('success') }}
     </div>
     @endif
+
+
     <form class="row g-3" action="{{route("AddBier.POST")}}"  method="POST" enctype="multipart/form-data">
         @csrf
         <div class="col-md-4">

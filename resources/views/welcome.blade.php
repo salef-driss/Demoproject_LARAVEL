@@ -11,6 +11,7 @@
 
     <div class="row mx-auto" >
         @foreach($bieren as $bier)
+        @if($bier->status == 1)
         <div class="col mb-3">
             <div class="card" style="width: 18rem;" style="margin-left:10%">
                 <img src="{{ asset('images/' . $bier->bierimage) }}" class="card-img-top" alt="{{$bier->naam }}">
@@ -29,6 +30,7 @@
                 </div>
             </div>
         </div>
+        @endif
         @endforeach
     </div>
 

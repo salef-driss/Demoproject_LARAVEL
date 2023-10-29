@@ -15,12 +15,17 @@ class OrderManager extends Controller
 {
 
     public function showOrders()
-    {
-        $user = Auth::user();
-        $winkelkaren = $user->winkelkar()->where('status', 2)->get();
+{
+    $user = Auth::user();
 
-        return view("Order", ['user' => $user, 'winkelkaren' => $winkelkaren]);
+    if ($user->role == "admin") {
+        $winkelkaren = Winkelkar::whereIn('status', [2, 3])->get();
+    } else {
+        $winkelkaren = $user->winkelkar()->whereIn('status', [2,3])->get();
     }
+
+    return view("Order", ['user' => $user, 'winkelkaren' => $winkelkaren]);
+}
 
     public function createOrder(Request $request)
     {
@@ -42,5 +47,20 @@ class OrderManager extends Controller
         }
 
         return redirect()->route('showOrders')->with('error', 'Failed to place the order.');
+    }
+
+
+    public function OrderUpdate($id)
+    {
+        $winkelkar = Winkelkar::find($id);
+
+        if ($winkelkar) {
+
+             $winkelkar->status = 3;
+             $winkelkar->save();
+            return redirect()->route('showOrders')->with('success', 'Order has been placed.');
+        } else {
+            return redirect()->route('showOrders')->with('error', 'Failed to place the order.');
+        }
     }
 }
