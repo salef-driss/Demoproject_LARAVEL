@@ -14,6 +14,9 @@ class BierManager extends Controller{
     {
         if(Auth::check() && Auth::user()->role == "admin"){
             $bier = Bier::find($id);
+            if($bier->status == 2){
+                abort(404);
+            }
             return view('updateBeer', compact('bier'));
         }else{
             return view("updateBeer")->with("error", "Geen toegang tot deze pagina, je hebt geen admin-rechten.");
