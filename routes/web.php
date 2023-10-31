@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\BierManager;
 use App\Http\Controllers\Winkelkar;
 use App\Http\Controllers\OrderManager;
+use App\Http\Controllers\NewsManager;
+
 
 
 
@@ -43,6 +45,7 @@ Route::group(["middleware" => "auth"] , function(){
     Route::get('/winkelkar/delete/{id}', [Winkelkar::class, 'deleteFromCart'])->name('deleteFromCart');
     Route::Post('/OrdersPost', [OrderManager::class, 'createOrder'])->name('createOrder');
     Route::get('/Orders', [OrderManager::class, 'showOrders'])->name('showOrders');
+    Route::get("/News" , [NewsManager::class, "showNews"])->name("showNews");
 });
 
 
@@ -70,7 +73,10 @@ Route::group(["middleware" => "adminChecker"], function () {
 
     Route::post('/beers/{id}/update',[BierManager::class, "BeerUpdatePost"])->name("beer.update");
     Route::post('/Orders/{id}/update',[OrderManager::class, "OrderUpdate"])->name("OrderUpdate");
+    Route::post("/AddNews",[NewsManager::class, "CreateNews"])->name("NewsAddPost");
+    Route::get("/News/delete/{id}" ,[NewsManager::class, "DeleteNews"])->name("DeleteNewsPost");
 
+    Route::get("/News/Update/{id}",[NewsManager::class, "showUpdateNews"])->name("UpdateNews");
 });
 
 

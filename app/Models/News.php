@@ -11,9 +11,9 @@ class News extends Model
 
     protected $fillable = [
         "Title",
-        "Cover Image",
+        "Cover_Image",
         "Content",
-        "Publishing date",
+        "Publishing_date",
         "user_id"
      ];
 
