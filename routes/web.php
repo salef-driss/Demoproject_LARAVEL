@@ -77,6 +77,7 @@ Route::group(["middleware" => "adminChecker"], function () {
     Route::get("/News/delete/{id}" ,[NewsManager::class, "DeleteNews"])->name("DeleteNewsPost");
 
     Route::get("/News/Update/{id}",[NewsManager::class, "showUpdateNews"])->name("UpdateNews");
+    Route::post("/News/Update/{id}", [NewsManager::class,"UpdateNewsPost"])->name("Update_News_Post");
 });
 
 

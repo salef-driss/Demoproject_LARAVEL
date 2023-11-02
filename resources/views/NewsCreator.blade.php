@@ -5,7 +5,7 @@
 @section("body")
 
     <div class="container mt-5">
-        <h1>Add News</h1>
+        <h1 style="text-align: center">News</h1>
 
         @if($errors->any())
         <div class = "col-12">
@@ -29,11 +29,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Title:</label>
-                        <input type="text" class="form-control" id="Title" name="title" placeholder="Enter your name">
+                        <input type="text" class="form-control" id="Title" name="title" placeholder="Title">
                     </div>
                     <div class="form-group">
                         <label for="message">Content:</label>
-                        <textarea class="form-control" id="content" name="content" rows="4" placeholder="Enter your message"></textarea>
+                        <textarea class="form-control" id="content" name="content" rows="4" placeholder="Enter your content"></textarea>
                     </div>
 
                     <div class="col-md-6">
@@ -61,7 +61,7 @@
 
                               @if($user->role == "admin")
                               <a href="{{ route('DeleteNewsPost', ['id' => $item->id]) }}" class="btn btn-danger">Delete</a>
-                              <a href="{{ route('UpdateNews', ['id' => $item->id]) }}" class="btn btn-danger">Update</a>
+                              <a href="{{ route('UpdateNews', ['id' => $item->id]) }}" class="btn btn-primary">Update</a>
                               @endif
                             </div>
                           </div>

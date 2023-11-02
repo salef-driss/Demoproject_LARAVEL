@@ -35,6 +35,9 @@
                     <a class="nav-link" href="{{route('showWinkelkar')}}">Cart</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('showNews')}}">News</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('showOrders')}}">Orders</a>
                 </li>
                 <li class="nav-item">

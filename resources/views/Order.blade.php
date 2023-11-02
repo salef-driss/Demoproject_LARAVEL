@@ -6,6 +6,22 @@
 <div class="container">
     <h1 style="text-align: center ; margin-bottom:2%;">Order</h1>
 
+    @if($user->role == "not_admin")
+        <div style="margin-bottom: 20px" class="card">
+            <div class="card-header">
+                <h5 class="card-title">Order Status</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Your order will be dispatched once the status is marked as <span class="text-success">green</span>.
+                    If it appears <span class="text-warning">yellow</span>, it means we are diligently processing and preparing your order for shipment.
+                    Payment will be collected in person upon delivery to your specified address. Should any issues or questions arise,
+                    please feel free to <a href="contact-us.html">contact us</a>.
+                </p>
+            </div>
+        </div>
+    @endif
+
     @foreach($winkelkaren as $winkelkar)
     @if($winkelkar->status == 2 || $winkelkar->status == 3)
 

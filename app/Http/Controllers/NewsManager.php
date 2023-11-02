@@ -51,7 +51,7 @@ class NewsManager extends Controller
         }
     }
 
-    function showUpdateNews($id){
+    public function showUpdateNews($id){
         $user = Auth::user();
         if($user->role == "admin"){
             $news = News::find($id);
@@ -62,7 +62,58 @@ class NewsManager extends Controller
         }
     }
 
-    function DeleteNews($id){
+    public function UpdateNewsPost(Request $request, $id) {
+        $user = Auth::user();
+
+        if ($user->role == "admin") {
+            if ($request->hasFile('Cover_Image')) {
+                $request->validate([
+                    'Title' => 'required',
+                    'Content' => 'required',
+                    'Cover_Image' => 'image|mimes:png,PNG,jpg,jpeg,png,JPG,JPEG',
+                ]);
+
+                $news = News::find($id);
+
+                if (!$news) {
+                    return redirect()->route('your.error.route')->with('error', 'News not found');
+                }
+
+                $image = $request->file('Cover_Image');
+                $extension = $image->getClientOriginalExtension(); // Get the file extension
+                $imageName = time() . '.' . $extension; // Generate a unique image name
+                $image->move(public_path("images"), $imageName); // Store the image in the 'public/images' directory
+
+                $news->Title = $request->Title;
+                $news->Content = $request->Content;
+                $news->Cover_Image = $imageName; // Assign the generated image name
+
+                $news->save();
+
+                return redirect()->route('UpdateNews', ['id' => $id]); // Redirect back to the update page
+            } else {
+                $request->validate([
+                    'Title' => 'required',
+                    'Content' => 'required',
+                ]);
+
+                $news = News::find($id);
+
+                if (!$news) {
+                    return redirect()->route('your.error.route')->with('error', 'News not found');
+                }
+
+                $news->Title = $request->Title;
+                $news->Content = $request->Content;
+
+                $news->save();
+
+                return redirect()->route('UpdateNews', ['id' => $id]); // Redirect back to the update page
+            }
+        }
+    }
+
+    public function DeleteNews($id){
         $user = Auth::user();
 
         if($user->role == "admin"){
