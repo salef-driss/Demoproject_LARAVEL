@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\winkelkar;
+use App\Models\FAQCategorie;
+
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
@@ -53,6 +55,10 @@ class User extends Authenticatable
         'password' => 'hashed',
 
     ];
+
+    public function Categorie(){
+        return $this->hasMany(FAQCategorie::class);
+    }
 
     public function winkelkar()
     {

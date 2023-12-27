@@ -6,6 +6,8 @@ use App\Http\Controllers\BierManager;
 use App\Http\Controllers\Winkelkar;
 use App\Http\Controllers\OrderManager;
 use App\Http\Controllers\NewsManager;
+use App\Http\Controllers\FAQManager;
+
 
 
 
@@ -46,6 +48,10 @@ Route::group(["middleware" => "auth"] , function(){
     Route::Post('/OrdersPost', [OrderManager::class, 'createOrder'])->name('createOrder');
     Route::get('/Orders', [OrderManager::class, 'showOrders'])->name('showOrders');
     Route::get("/News" , [NewsManager::class, "showNews"])->name("showNews");
+
+    Route::get("/FAQCategorie" , [FAQManager::class, "showFAQCategorie"])->name("FAQCategorie");
+    Route::get("/FAQQuestions/{id}" , [FAQManager::class , "showFAQQuestions"])->name("FAQQuestionsGet");
+
 });
 
 
@@ -78,6 +84,17 @@ Route::group(["middleware" => "adminChecker"], function () {
 
     Route::get("/News/Update/{id}",[NewsManager::class, "showUpdateNews"])->name("UpdateNews");
     Route::post("/News/Update/{id}", [NewsManager::class,"UpdateNewsPost"])->name("Update_News_Post");
+
+    Route::post("/FAQCategorie/Create" , [FAQManager::class, "createFAQ"])->name("FAQCreate");
+    Route::get("/FAQCategorie/Delete/{id}", [FAQManager::class, "DeleteFAQ"])->name("FAQDelete");
+    Route::get("/FAQCategorie/update/{id}" , [FAQManager::class, "FAQUpdateGet"])->name("FAQUpdateGET");
+
+    Route::post("/FAQCategorie/updatePost/{id}" , [FAQManager::class, "FAQUpdatePOST"])->name("FAQUpdatePost");
+    Route::get("/FAQQuestion/Delete/{id}" , [FAQManager::class , "FAQQuestionDelete"])->name("FAQQuestionDelete");
+    Route::post("/FAQQuestion/Create/{id}" , [FAQManager::class , "FAQCreate"])->name("FAQQuestionCreate");
+    Route::get("/FAQQuestion/Update/{id}" , [FAQManager::class , "FAQQuestionUpdateShow"])->name("FAQQuestion_Update_show");
+    Route::post("/FAQQuestion/UpdatePost/{id}" , [FAQManager::class , "FAQQuestionUpdatePOST"])->name("FAQQuestion_Update_Post");
+
 });
 
 
