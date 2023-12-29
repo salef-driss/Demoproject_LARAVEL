@@ -4,6 +4,15 @@
 @section("body")
 
 <div class="container">
+
+    @if(session('error'))
+    <div class="col-12">
+        <div class="alert alert-danger auto-dismiss fade-out">{{ session('error') }}</div>
+    </div>
+    @endif
+
+
+
     <div class="row">
         <div class="col-md-4">
             <div class="card">

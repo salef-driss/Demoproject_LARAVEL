@@ -7,6 +7,7 @@ use App\Models\Bier;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BierManager extends Controller{
 
@@ -141,12 +142,14 @@ class BierManager extends Controller{
 
     public function showBestelling($id){
         $bier = Bier::find($id);
+        $teveelBier = "";
+
 
         if(!$bier){
             return redirect()->route('home')->with('error', 'Bier niet gevonden.');
         }
 
-        return view("bestellenPage",compact("bier"));
+        return view("bestellenPage",compact("bier", "teveelBier"));
     }
 
     public function addToCart(Request $request, $bier_id){
@@ -168,9 +171,30 @@ class BierManager extends Controller{
         }
     }
 
-    $activeCart->winkelkar_bieren()->attach($bier_id, ['quantity' => $quantity]);
+    if ($bier->stok < $quantity) {
+        $teveelBier = "Niet genoeg voorraad beschikbaar.";
+        return redirect()->route('showBestelling', ['id' => $bier_id])->with( 'error', $teveelBier);
+    }
 
-    return redirect()->route('showWinkelkar')->with('success', 'Bier is toegevoegd aan de winkelmand.');
+    DB::beginTransaction();
+
+    try {
+        // Voeg het bier toe aan de winkelkar
+        $activeCart->winkelkar_bieren()->attach($bier_id, ['quantity' => $quantity]);
+
+        // Werk de voorraad van het bier bij
+        $bier->decrement('stok', $quantity);
+
+        // Commit de transactie als beide stappen succesvol zijn
+        DB::commit();
+
+        return redirect()->route('showWinkelkar')->with('success', 'Bier is toegevoegd aan de winkelmand.');
+    } catch (\Exception $e) {
+        // Rollback de transactie als er een fout optreedt
+        DB::rollback();
+
+        return redirect()->route('showWinkelkar')->with('error', 'Er is een fout opgetreden bij het toevoegen van het bier aan de winkelmand.');
+    }
     }
 }
 ?>

@@ -39,6 +39,7 @@ class OrderManager extends Controller
                 $winkelkar->status = 2;
                 $winkelkar->save();
 
+
                 $newWinkelkar = new Winkelkar();
                 $newWinkelkar->status = 1;
                 $user->winkelkar()->save($newWinkelkar);
