@@ -7,6 +7,8 @@ use App\Http\Controllers\Winkelkar;
 use App\Http\Controllers\OrderManager;
 use App\Http\Controllers\NewsManager;
 use App\Http\Controllers\FAQManager;
+use App\Http\Controllers\ContactFormController;
+
 
 
 
@@ -38,6 +40,10 @@ Route::get("/logout" , [AuthManager::class, "logout"])->name("logout");
 Route::get("/acountsettings" , [AuthManager::class, "Showacountsettings"])->name("acountsettings");
 Route::post("/acountsettings" , [AuthManager::class, "UpdateAcountsettings"])->name("acountsettings.post");
 
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+
 
 Route::group(["middleware" => "auth"] , function(){
     Route::get("/home" , [AuthManager::class ,"homeAssortiment"])->name("home");
@@ -51,7 +57,8 @@ Route::group(["middleware" => "auth"] , function(){
 
     Route::get("/FAQCategorie" , [FAQManager::class, "showFAQCategorie"])->name("FAQCategorie");
     Route::get("/FAQQuestions/{id}" , [FAQManager::class , "showFAQQuestions"])->name("FAQQuestionsGet");
-
+    Route::get("/ContactForm" , [ContactFormController::class , "ContactFormShow"])->name("ContactForm");
+    Route::get("/ContactFomrCreate", [ContactFormController::class , "ContactFormCreate"])->name("ContactFormCreaet");
 });
 
 
@@ -95,6 +102,7 @@ Route::group(["middleware" => "adminChecker"], function () {
     Route::get("/FAQQuestion/Update/{id}" , [FAQManager::class , "FAQQuestionUpdateShow"])->name("FAQQuestion_Update_show");
     Route::post("/FAQQuestion/UpdatePost/{id}" , [FAQManager::class , "FAQQuestionUpdatePOST"])->name("FAQQuestion_Update_Post");
 
+    Route::get("/ContactForm/Delete/{id}", [ContactFormController::class , "ContactFormDelete"])->name("ContactFormDelete");
 });
 
 

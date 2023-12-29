@@ -32,7 +32,9 @@ class User extends Authenticatable
         "houseNr",
         'password',
         "role",
-        "status"
+        "status",
+        "aboutme",
+        "avatar"
     ];
 
     /**

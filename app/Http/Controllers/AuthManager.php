@@ -71,6 +71,8 @@ class AuthManager extends Controller
             $data["houseNr"] =  $request->houseNr;
             $data["street"] = $request->street;
             $data["role"] = "not_admin";
+            $data["aboutme"] = "Fill about me in";
+            $data["avatar"] = "defaultAvatar.jpg";
             $data["password"] = Hash::make($request->password);
 
 
@@ -126,6 +128,22 @@ class AuthManager extends Controller
             $updateData['street'] = $request->street;
         }
 
+        if($request->filled("aboutMe")){
+            $updateData['aboutme'] = $request->aboutMe;
+        }
+
+        if($request->hasFile("avatarImage")){
+
+            $image = $request->file("avatarImage");
+            $extension = $image->getClientOriginalExtension();
+            $imageName = time() . "." . $extension;
+            $image->move(public_path("images"),$imageName);
+            $updateData["avatar"] = $imageName;
+
+        }else{
+            $updateData["avatar"] = "defaultAvatar.jpg";
+        }
+
         $user->update($updateData);
 
          return redirect(route('acountsettings'))->with("success", "Account settings updated successfully.");
@@ -137,8 +155,10 @@ class AuthManager extends Controller
     }
 
     function adminifyShow(){
-        $users = User::all();
-        return view("adminAddDell" , compact("users"));
+        $currentUser = Auth::user();
+        $users = User::where('id', '!=', $currentUser->id)->get();
+
+        return view("adminAddDell", compact("users"));
     }
 
     function adminifyShowPost(Request $request, $id) {
@@ -168,12 +188,9 @@ class AuthManager extends Controller
         return redirect()->route('adminifyShow')->with('success', 'Gebruiker is succesvol verwijderd.');
     }
 
-
-
     function logout(){
         Session::flush();
         Auth::logout();
         return redirect(route('login'));
-
     }
 }

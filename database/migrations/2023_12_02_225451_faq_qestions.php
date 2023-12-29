@@ -15,8 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('FaQCategorie_id');
             $table->timestamps();
 
-            $table->foreign('FaQCategorie_id')->references('id')->on('faq_categories')
-            ->onDelete('cascade');;
+            $table->foreign('FaQCategorie_id')->references('id')->on('faq_categories')->onDelete('cascade');
 
             // Voeg eventuele extra kolommen toe die je nodig hebt.
         });

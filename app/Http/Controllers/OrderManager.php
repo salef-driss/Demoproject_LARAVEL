@@ -34,6 +34,7 @@ class OrderManager extends Controller
         if ($user) {
             $winkelkar = $user->winkelkar()->where('status', 1)->first();
 
+
             if ($winkelkar) {
                 $winkelkar->status = 2;
                 $winkelkar->save();

@@ -41,6 +41,9 @@
                     <a class="nav-link" href="{{route('showOrders')}}">Orders</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('FAQCategorie')}}">FAQ</a>
+                </li>
+                <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}">Logout</a>
                 </li>
 
