@@ -22,19 +22,24 @@
         </div>
          @endif
 
-    <form action="{{route('login.post')}}" method="POST">
+    <form action="{{route('reste.password.post')}}" method="POST">
         @csrf
+        <input type="text" name="token" hidden value="{{$token}}">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
+
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <label  class="form-label">Enter new password</label>
             <input type="password" class="form-control" name="password">
         </div>
+        <div class="mb-3">
+            <label  class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" name="password_confirmation">
+        </div>
 
-        <a href="{{route("forgot.password")}}">Forgot Password</a>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
