@@ -57,6 +57,7 @@ class AuthManager extends Controller
             "email" => "required|email|unique:users",
             "password" => "required",
             "street" => "required",
+            "birthday" => "required|date",
             "passwordrepeat" => "required | same:password",
         ], [
             'passwordrepeat.same' => 'The password repeat field must match the password field.',
@@ -73,6 +74,7 @@ class AuthManager extends Controller
             $data["role"] = "not_admin";
             $data["aboutme"] = "Fill about me in";
             $data["avatar"] = "defaultAvatar.jpg";
+            $data["birthday"] = $request->birthday;
             $data["password"] = Hash::make($request->password);
 
 
@@ -88,6 +90,8 @@ class AuthManager extends Controller
         return redirect(route('login'))->with("success" , "registration succes , Login to acces the aplication");
 
     }
+
+
 
     function Showacountsettings(){
 
@@ -131,6 +135,11 @@ class AuthManager extends Controller
         if($request->filled("aboutMe")){
             $updateData['aboutme'] = $request->aboutMe;
         }
+
+        if ($request->filled('birthday')) {
+            $updateData['birthday'] = $request->birthday;
+        }
+
 
         if($request->hasFile("avatarImage")){
 

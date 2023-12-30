@@ -59,6 +59,11 @@
         </div>
 
         <div class="col-md-6">
+            <label for="birthday" class="form-label">Birthday</label>
+            <input type="date" class="form-control" name="birthday" id="birthday">
+        </div>
+
+        <div class="col-md-6">
              <label for="exampleInputPassword1" class="form-label">Password</label>
              <input type="password" class="form-control" name = "password">
         </div>

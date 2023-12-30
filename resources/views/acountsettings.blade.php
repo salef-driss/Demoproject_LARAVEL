@@ -36,6 +36,8 @@
             <input type="number" class="form-control" name = "houseNr" value = "{{$user->houseNr}}">
         </div>
 
+
+
         <div class="col-md-3"> <!-- Allocate 30% width to the image -->
             <label for="name" class="form-label">User Avatar:</label>
             <img src="{{ asset('images/' . $user->avatar) }}" style="max-width: 75%;" alt="">
@@ -44,6 +46,11 @@
         <div class="col-md-6">
             <label for="file" class="form-label">Select Image</label>
             <input type="file" name="avatarImage" class="form-control" >
+        </div>
+
+        <div class="col-md-6">
+            <label for="birthday" class="form-label">Birthday</label>
+            <input type="date" class="form-control" name="birthday" id="birthday" value="{{$user->birthday}}">
         </div>
 
         <div class="form-floating">

@@ -34,7 +34,8 @@ class User extends Authenticatable
         "role",
         "status",
         "aboutme",
-        "avatar"
+        "avatar",
+        "birthday"
     ];
 
     /**
