@@ -63,6 +63,7 @@ Route::group(["middleware" => "auth"] , function(){
     Route::get("/FAQQuestions/{id}" , [FAQManager::class , "showFAQQuestions"])->name("FAQQuestionsGet");
     Route::get("/ContactForm" , [ContactFormController::class , "ContactFormShow"])->name("ContactForm");
     Route::get("/ContactFomrCreate", [ContactFormController::class , "ContactFormCreate"])->name("ContactFormCreaet");
+    Route::get("/AboutBronnen", [AuthManager::class , "AboutBronnen"])->name("AboutBronnen");
 });
 
 
